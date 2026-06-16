@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: taskpilot-backend
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:taskpilot}
+    username: ${DB_USER:admin}
+    password: ${DB_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    root: INFO
+    com.taskpilot: DEBUG
+
+jwt:
+  secret: ${JWT_SECRET:your-super-secret-key-that-must-be-at-least-256-bits-long-for-hs256-algorithm-security-requirement}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+kakao:
+  client-id: ${KAKAO_CLIENT_ID:your-kakao-client-id}
+  client-secret: ${KAKAO_CLIENT_SECRET:your-kakao-client-secret}
+  redirect-uri: ${KAKAO_REDIRECT_URI:http://localhost:3000/auth/kakao/callback}
+  token-url: https://kauth.kakao.com/oauth/token
+  user-info-url: https://kapi.kakao.com/v2/user/me
+
+openai:
+  api-key: ${OPENAI_API_KEY:sk-placeholder}
+
+kakao-bot:
+  webhook-url: ${KAKAO_BOT_WEBHOOK_URL:https://example.kakao.com/webhook}
